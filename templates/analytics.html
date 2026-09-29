@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HR Analytics</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Sidebar -->
+    <aside>
+        <h2>HR Analytics</h2>
+
+        <nav>
+            <a href="/dashboard" style="font-weight: bold;"><img src="{{ url_for('static', filename='home.png') }}"> Dashboard</a>
+            <a href="/employee" style="font-weight: bold;"> <img src="{{ url_for('static', filename='employees.png') }}"> Employees</a>
+            <a href="/attendance" style="font-weight: bold;"><img src="{{ url_for('static', filename='attendance.png') }}"> Attendance</a>
+            <a href="/leave" style="font-weight: bold;"><img src="{{ url_for('static', filename='leave.png') }}"> Leave</a>
+            <a href="/performance" style="font-weight: bold;"><img src="{{ url_for('static', filename='performance.png') }}"> Performance</a>
+            <a href="/analytics" style="font-weight: bold;"><img src="{{ url_for('static', filename='analytics.png') }}"> Analytics</a>
+        </nav>
+        <br>
+        <a href="/" style="font-weight: bold;">
+            <img src="{{ url_for('static', filename='logout.png') }}"> Logout</a>
+    </aside>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Header -->
+        <header>
+            <h1>HR Analytics</h1>
+            <p>Analyze employee data and HR performance</p>
+        </header>
+        <!-- Analytics Overview -->
+        <section>
+            <h2>Analytics Overview</h2>
+            <p>View employee, attendance, leave and performance insights.</p>
+        </section>
+        
+        <!-- Analytics Cards -->
+        <section class="analytics-cards">
+            <div class="analytics-card">
+                <h3>Total Employees</h3>
+                <h2>{{ total_employees }}</h2>
+                <p>Active employees</p>
+            </div>
+            <div class="analytics-card">
+                <h3>Attendance Rate</h3>
+                <h2>{{ attendance_rate }}%</h2>
+                <p>Overall attendance</p>
+            </div>
+            <div class="analytics-card">
+                <h3>Leave Rate</h3>
+                <h2>{{ leave_rate }}%</h2>
+                <p>Current leave rate</p>
+            </div>
+            <div class="analytics-card">
+                <h3>Performance</h3>
+                <h2>{{ performance_average }}%</h2>
+                <p>Average performance</p>
+            </div>
+        </section>
+        <!-- Analytics Charts -->
+        <section class="analytics-charts">
+            <div class="analytics-chart-box">
+                <h2>Employee by Department</h2>
+                <canvas id="departmentChart"></canvas>
+            </div>
+            <div class="analytics-chart-box">
+                <h2>Attendance Analysis</h2>
+                <canvas id="attendanceAnalyticsChart"></canvas>
+            </div>
+            <div class="analytics-chart-box">
+                <h2>Leave Analysis</h2>
+                <canvas id="leaveChart"></canvas>
+            </div>
+            <div class="analytics-chart-box">
+                <h2>Performance Analysis</h2>
+                <canvas id="performanceAnalyticsChart"></canvas>
+            </div>
+        </section>
+    </main>
+
+    <!-- AI chat Buttton -->
+    <button class="chat-toggle" onclick="toggleChat()">
+        <img src="{{ url_for('static', filename='ai chatbot button2.png') }}"></button>
+
+    <!-- AI Chat Box -->
+    <div class="chatbot">
+        <div class="chat-header">
+            <img src="{{ url_for('static', filename='ai chatbot.png') }}" alt="Image" class="ai-icon"> HR AI Assistant
+        </div>
+
+        <div class="chat-messages" id="chatMessages">
+            <div class="bot-message">
+                Hi! 👋🏻 How can I help you?
+            </div>
+        </div>
+
+        <div class="chat-input">
+            <input type="text" id="chatInput" placeholder="Ask something...">
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+    <script type="application/json" id="departmentData">
+    {{ department_data | tojson }}
+    </script>
+
+    <script type="application/json" id="attendanceData">
+    {{ attendance_data | tojson }}
+    </script>
+
+    <script type="application/json" id="leaveData">
+    {{ leave_data | tojson }}
+    </script>
+
+    <script type="application/json" id="performanceData">
+    {{ performance_data | tojson }}
+    </script>
+
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>    

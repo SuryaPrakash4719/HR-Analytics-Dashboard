@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Employee</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .edit-container {
+            width: 500px;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.12);
+        }
+        .edit-container h2 {
+            margin-top: 0;
+            color: #173b72;
+            text-align: center;
+            margin-bottom: 8px;
+        }
+        .edit-container p {
+            text-align: center;
+            color: #777;
+            margin-bottom: 25px;
+            font-weight: bold;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: bold;
+            color: #333;
+        }
+        .form-group input {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 11px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 14px;
+            outline: none;
+        }
+        .form-group input:focus {
+            border-color: #173b72;
+        }
+        .button-group {
+            display: flex;
+            gap: 12px;
+            margin-top: 25px;
+        }
+        .update-btn,
+        .cancel-btn {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            font-size: 15px;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+        }
+        .update-btn {
+            background: #173b72;
+            color: white;
+        }
+        .update-btn:hover {
+            background: #102d58;
+        }
+        .cancel-btn {
+            background-color: #e5e7eb;
+            color: #333;
+        }
+        .cancel-btn:hover {
+            background: #d1d5db;
+        }
+    </style>
+
+
+
+</head>
+
+<body>
+
+    <div class="edit-container">
+        
+        <h2>Edit Employee</h2>
+        <p>Update employee information</p>
+
+        <form action="/update_employee/{{employee.employee_id}}" method="POST">
+
+            <div class="form-group">
+                <label>Employee ID</label>
+                <input type="text"
+                       value="{{ employee.employee_id }}"
+                       readonly>
+            </div>
+
+            <div class="form-group">
+                <label>Employee Name</label>
+                <input type="text"
+                       name="employee_name"
+                       value="{{ employee.employee_name }}"
+                       required>
+            </div>
+
+            <div class="form-group">
+                <label>Department</label>
+                <input type="text"
+                       name="department"   
+                       value="{{ employee.department }}"
+                       required>
+            </div>
+
+            <div class="form-group">
+                <label>Email</label>
+                <input type="text"
+                       name="email" 
+                       value="{{ employee.email }}"
+                       required>
+            </div>
+
+            <div class="form-group">
+                <label>Phone</label>
+                <input type="text"
+                       name="phone"
+                       value="{{ employee.phone }}"
+                       required>
+            </div>
+
+            <div class="form-group">
+                <label>Joining Date</label>
+                <input type="text"
+                       name="joining_date"
+                       value="{{ employee.joining_date }}"
+                       required>
+            </div>
+
+            <div class="button-group">
+                <button type="submit" class="update-btn">Update Employee</button>
+
+                <a href="/employee" class="cancel-btn">Cancel</a>
+            </div>
+
+        </form>
+    </div>
+</body>
+</html>

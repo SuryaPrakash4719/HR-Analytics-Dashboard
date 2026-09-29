@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HR Analytics Dashboard</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+    
+<body>
+
+    <!-- Slidebar -->
+    <aside>
+
+        <h2>HR Analytics</h2>
+
+        <nav>
+            <a href="/dashboard" style="font-weight: bold;"><img src="{{ url_for('static', filename='home.png') }}"> Dashboard</a>
+            <a href="/employee" style="font-weight: bold;"> <img src="{{ url_for('static', filename='employees.png') }}"> Employees</a>
+            <a href="/attendance" style="font-weight: bold;"><img src="{{ url_for('static', filename='attendance.png') }}"> Attendance</a>
+            <a href="/leave" style="font-weight: bold;"><img src="{{ url_for('static', filename='leave.png') }}"> Leave</a>
+            <a href="/performance" style="font-weight: bold;"><img src="{{ url_for('static', filename='performance.png') }}"> Performance</a>
+            <a href="/analytics" style="font-weight: bold;"><img src="{{ url_for('static', filename='analytics.png') }}"> Analytics</a>
+        </nav>
+
+        <br>
+
+        <a href="/" style="font-weight: bold;">
+            <img src="{{ url_for('static', filename='logout.png') }}"> Logout</a>
+
+    </aside>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Top Header -->
+        <header>
+            <h1>HR Analytics Dashboard</h1>
+
+            <p>Welcome, HR Admin!</p>
+
+        </header>
+
+        <!-- Dashboard Content -->
+        <section>
+            <h2>Dashboard Overview</h2>
+
+            <p>Manage employees, attendance, leave and performance from one place.</p>
+
+        </section>
+
+        <!-- Summary Cards-->
+        
+        <section class="summary-box">
+            <div class="summary-item">
+                <h3>Total Employees</h3>
+                <h2>{{ total_employees }}</h2>
+                <p>Active Employees</p>
+            </div>
+
+            <div class="summary-item">
+                <h3>Present Today</h3>
+                <h2>{{ present_today }}</h2>
+                <p>Employees Present</p>
+            </div>
+
+            <div class="summary-item">
+                <h3>Active Employees</h3>
+                <h2>{{ active_employees }}</h2>
+                <p>Employees Present</p>
+            </div>
+
+            <div class="summary-item">
+                <h3>On Leave</h3>
+                <h2>{{ on_leave }}</h2>
+                <p>Employees on Leave</p>
+            </div>
+
+            <div class="summary-item">
+                <h3>Average Performance</h3>
+                <h2>{{ average_performance }}%</h2>
+                <p>Overall Performance</p>
+            </div>
+        </section>
+
+        <!-- Analytics Charts -->
+        <section class="charts">
+            <!-- Perfomance Chart -->
+            <div class="chart-box">
+                <h2>Employee Performance</h2>
+
+                <canvas id="performanceChart"></canvas>
+
+                <script type="application/json" id="dashboardPerformanceData">
+                    {{ performance_data | tojson }}
+                </script>
+                
+            </div>
+
+            <!-- Attendance Chart -->
+            <div class="chart-box">
+                <h2>Attendance Analysis</h2>
+
+                <canvas id="attendanceChart"></canvas>
+
+                <script type="application/json" id="dashboardAttendanceData">
+                    {{ attendance_data | tojson }}
+                </script>
+            
+            </div>
+        </section>
+    </main>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+    <!-- AI chat Buttton -->
+    <button class="chat-toggle" onclick="toggleChat()">
+        <img src="{{ url_for('static', filename='ai chatbot button2.png') }}"></button>
+
+    <!-- AI Chat Box -->
+    <div class="chatbot">
+        <div class="chat-header">
+            <img src="{{ url_for('static', filename='ai chatbot.png') }}" alt="Image" class="ai-icon"> HR AI Assistant
+        </div>
+
+        <div class="chat-messages" id="chatMessages">
+            <div class="bot-message">
+                Hi! 👋🏻 How can I help you?
+            </div>
+        </div>
+
+        <div class="chat-input">
+            <input type="text" id="chatInput" placeholder="Ask something...">
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>  
+</body>
+</html>
+
